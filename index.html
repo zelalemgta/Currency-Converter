@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Currency Converter</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-light bg-info w-100 px-0">
+                <a class="navbar-brand text-light col-md-9 col-sm-12 mx-auto" href=".">
+                    <i class="fa fa-money-bill-wave mr-1"></i> Currency Converter
+                </a>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-9 col-sm-12 mx-auto bg-lightgray mt-md-4 py-4 rounded border-top border-bottom">
+                <h6 class="text-secondary">1 Ethiopian Birr equals </h6>
+                <h3>27.21 US Dollars</h3>
+                <hr/>
+                <div class="row">
+                    <form class="col-md-5 col-sm-12 mt-md-5 border-right">
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="fromCurrency">From</label>
+                                <select id="fromCurrency" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>Ethiopian Birr (ETB)</option>
+                                    <option>Eriterian Nakfa (NFK)</option>
+                                    <option>US Dollars (USD)</option>
+                                </select>
+                                <small id="fromHelp" class="form-text text-muted">Select currency to convert from.</small>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="amount">Amount</label>
+                                <input type="number" id="amount" class="form-control" value="0" />
+                                <small id="amount" class="form-text text-muted">Type the amount to convert.</small>
+                            </div>
+                        </div>
+
+                        <div class="currency-separator d-block text-center my-md-2">
+                            <i class="fa fa-exchange-alt text-success"></i>
+                        </div>
+
+                        <div class="form-row border-bottom mb-2">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="fromCurrency">To</label>
+                                <select id="toCurrency" class="form-control">
+                                    <option selected>Choose...</option>
+                                    <option>Ethiopian Birr (ETB)</option>
+                                    <option>Eriterian Nakfa (NFK)</option>
+                                    <option>US Dollars (USD)</option>
+                                </select>
+                                <small id="toHelp" class="form-text text-muted">Select currency to convert to.</small>
+                            </div>
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label for="value">Value</label>
+                                <input type="number" id="amount" class="form-control border-success" value="0.00" readonly="readonly" />
+                                <small id="amount" class="form-text text-muted">Converted Value</small>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="d-none btn btn-primary float-right">
+                            <i class="fa fa-arrow-alt-circle-right"></i> Convert</button>
+                    </form>
+
+                    <!-- Chart JS to show currency history for the past 12 months-->
+
+                    <div class="col-md-7 col-sm-12 px-md-2">
+                        <canvas id="currencyChart" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row fixed-bottom bg-dark text-white p-3">
+            <div class="col-md-9 col-sm-12 mx-auto text-center footer-text">
+                    © 2018 <a href="https://www.linkedin.com/in/zelalem-gebeyehu/" target="_blank">Zelalem Gebeyehu Tessema</a>, Google Africa Scholarship Challenge.           
+            </div>
+        </div>
+    </div>
+
+    <!-- Site Scripts -->
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>
