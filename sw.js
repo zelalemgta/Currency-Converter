@@ -4,10 +4,10 @@ self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.open(staticCacheName).then(function (cache) {
             return cache.addAll([
-                '/',
-                'js/main.js',
-                'js/idb/idb.js',
-                'css/main.css',
+                'Currency-Converter/',
+                'Currency-Converter/js/main.js',
+                'Currency-Converter/js/idb/idb.js',
+                'Currency-Converter/css/main.css',
                 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css',
                 'https://use.fontawesome.com/releases/v5.1.0/css/all.css',
                 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js'
