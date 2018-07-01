@@ -79,7 +79,6 @@ class CurrencyConverter {
         if (this.fromCurrency.value != 0 && this.toCurrency.value != 0) {
             const ratePromise = this.getRate(this.fromCurrency.value, this.toCurrency.value);
             ratePromise.then(currencyRate => {
-                //console.log(currencyRate);
                 const roundedRate = parseFloat(Object.values(currencyRate)).toPrecision(4);
                 this.rateMultiplier.value = roundedRate;
                 this.currencyInfoFrom.innerHTML = `1 ${this.fromCurrency.options[this.fromCurrency.selectedIndex].innerHTML} equals`;
@@ -93,33 +92,23 @@ class CurrencyConverter {
     }
     /************** END of Currency Converter Methods **********/
 
-    /********* API Promise Calls *************/
+    /*************** IDB Calls *****************/
 
     getCurrencies() {
-
         return this.idbPromise.then((db) => {
             if (db) {
                 var index = db.transaction('currencies')
                     .objectStore('currencies');
 
-                return index.getAll().then((currenciesList) => { return currenciesList });
-            } else {
-                return fetch(`${this.apiUrl}${this.currenciesEndpoint}`)
-                    .then(response => {
-                        return response.json();
-                    }).then(jsonData => {
-                        const currenciesList = Object.keys(jsonData.results).map(i => jsonData.results[i]);
-
-                        //Store it to IDB Currency-Db Store for offline use
-                        var tx = db.transaction('currencies', 'readwrite');
-                        var store = tx.objectStore('currencies');
-                        currenciesList.map(currency => {
-                            store.put(currency);
-                        });
-
-                        return currenciesList;
-                    }).catch(error => console.error(error));
+                return index.getAll().then((currenciesList) => {
+                    if (currenciesList.length != 0)
+                        return currenciesList
+                    else
+                        return this.getCurrenciesFromAPI();
+                });
             }
+            else
+                return this.getCurrenciesFromAPI();
         });
     }
 
@@ -137,24 +126,6 @@ class CurrencyConverter {
             } else
                 return this.getRateFromAPI(from, to);
         });
-    }
-
-    getRateFromAPI(from, to) {
-        return fetch(`${this.apiUrl}${this.convertEndpoint}?q=${from}_${to}&compact=ultra`)
-            .then(response => {
-                return response.json();
-            })
-            .then(jsonData => {
-                //Store for future reference
-                this.idbPromise.then((db) => {
-                    var tx = db.transaction('currenciesRate', 'readwrite');
-                    var store = tx.objectStore('currenciesRate');
-                    store.put(Object.values(jsonData)[0], Object.keys(jsonData)[0]);
-                    tx.complete;
-                });
-                return jsonData;
-            })
-            .catch(error => console.error(error));
     }
 
     getHistory(from, to) {
@@ -180,6 +151,47 @@ class CurrencyConverter {
             } else
                 return this.getHistoryFromAPI(from, to);
         });
+    }
+
+    /*************** END Of IDB Calls *****************/
+
+    /********* API Promise Calls *************/
+
+    getCurrenciesFromAPI() {
+        return fetch(`${this.apiUrl}${this.currenciesEndpoint}`)
+            .then(response => {
+                return response.json();
+            }).then(jsonData => {
+                const currenciesList = Object.keys(jsonData.results).map(i => jsonData.results[i]);
+
+                //Store it to IDB Currency-Db Store for offline use
+                this.idbPromise.then((db) => {
+                    var tx = db.transaction('currencies', 'readwrite');
+                    var store = tx.objectStore('currencies');
+                    currenciesList.map(currency => {
+                        store.put(currency);
+                    });
+                });
+                return currenciesList;
+            }).catch(error => console.error(error));
+    }
+
+    getRateFromAPI(from, to) {
+        return fetch(`${this.apiUrl}${this.convertEndpoint}?q=${from}_${to}&compact=ultra`)
+            .then(response => {
+                return response.json();
+            })
+            .then(jsonData => {
+                //Store for future reference
+                this.idbPromise.then((db) => {
+                    var tx = db.transaction('currenciesRate', 'readwrite');
+                    var store = tx.objectStore('currenciesRate');
+                    store.put(Object.values(jsonData)[0], Object.keys(jsonData)[0]);
+                    tx.complete;
+                });
+                return jsonData;
+            })
+            .catch(error => console.error(error));
     }
 
     getHistoryFromAPI(from, to) {
@@ -314,8 +326,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let currencyConverter = new CurrencyConverter();
 
     currencyConverter.registerServiceWorker();
-
-    // currencyConverter.initIDB();
     currencyConverter.initApp();
     currencyConverter.initChart();
 
