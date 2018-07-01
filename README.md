@@ -1,6 +1,6 @@
 # #7DaysofCodeChallenge - Currency-Converter
 
-PWA Currency Converter
+#PWA Currency Converter
 
 Checkout live at: https://zelalemgta.github.io/Currency-Converter/
 
@@ -16,5 +16,5 @@ Features:   Service Worker
 
 ALC with Google
 
-Developer - Zelalem Gebyehu Tessema
+#Developer - Zelalem Gebeyehu Tessema
 
