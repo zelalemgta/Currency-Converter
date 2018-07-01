@@ -25,26 +25,24 @@
         </div>
         <div class="row">
             <div class="col-md-9 col-sm-12 mx-auto bg-lightgray mt-md-4 py-4 rounded border-top border-bottom">
-                <h6 class="text-secondary">1 Ethiopian Birr equals </h6>
-                <h3>27.21 US Dollars</h3>
+                <h6 id="currencyInfoFrom" class="text-secondary">7 Days Code Challenge </h6>
+                <h3 id="currencyInfoTo">ALC with Google</h3>
                 <hr/>
                 <div class="row">
                     <form class="col-md-5 col-sm-12 mt-md-5 border-right">
                         <div class="form-row">
+                            <input type="hidden" id="rateMultiplier" value="0" />
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="fromCurrency">From</label>
                                 <select id="fromCurrency" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>Ethiopian Birr (ETB)</option>
-                                    <option>Eriterian Nakfa (NFK)</option>
-                                    <option>US Dollars (USD)</option>
+                                    <option selected value="0">Choose...</option>
                                 </select>
                                 <small id="fromHelp" class="form-text text-muted">Select currency to convert from.</small>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
                                 <label for="amount">Amount</label>
-                                <input type="number" id="amount" class="form-control" value="0" />
-                                <small id="amount" class="form-text text-muted">Type the amount to convert.</small>
+                                <input type="number" id="amount" class="form-control" value="0" min="0" />
+                                <small id="amount" class="form-text text-muted">Type the amount to convert and press <b><i class="fa fa-arrow-alt-circle-right"></i> Enter</b>.</small>
                             </div>
                         </div>
 
@@ -54,19 +52,16 @@
 
                         <div class="form-row border-bottom mb-2">
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="fromCurrency">To</label>
+                                <label for="toCurrency">To</label>
                                 <select id="toCurrency" class="form-control">
-                                    <option selected>Choose...</option>
-                                    <option>Ethiopian Birr (ETB)</option>
-                                    <option>Eriterian Nakfa (NFK)</option>
-                                    <option>US Dollars (USD)</option>
+                                    <option selected value="0">Choose...</option>
                                 </select>
                                 <small id="toHelp" class="form-text text-muted">Select currency to convert to.</small>
                             </div>
                             <div class="form-group col-md-6 col-sm-12">
-                                <label for="value">Value</label>
-                                <input type="number" id="amount" class="form-control border-success" value="0.00" readonly="readonly" />
-                                <small id="amount" class="form-text text-muted">Converted Value</small>
+                                <label for="convertedValue">Value</label>
+                                <input type="number" id="convertedValue" class="form-control border-success" value="0.00" readonly="readonly" />
+                                <small id="convertedValue" class="form-text text-muted">Converted Value</small>
                             </div>
                         </div>
 
@@ -91,10 +86,8 @@
 
     <!-- Site Scripts -->
     <script src="js/main.js"></script>
+    <script src="js/idb/idb.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
-    <script>
-
-    </script>
 </body>
 
 </html>
