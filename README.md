@@ -10,7 +10,7 @@ Features:   Service Worker
             CacheAPI
             IndexedDb
             ChartJS -- For visualization of currency history
-            Reponsive Design
+            Responsive Design
 
 
 
